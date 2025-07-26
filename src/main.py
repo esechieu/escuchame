@@ -1,21 +1,23 @@
 import os
-import sounddevice as sd
-from scipy.io.wavfile import write
-from faster_whisper import WhisperModel
 import tkinter as tk
 from tkinter import ttk
+
+import sounddevice as sd
+from faster_whisper import WhisperModel
+from scipy.io.wavfile import write
 
 # ==============================
 # CONFIGURACIÓN
 # ==============================
 
 DURACION = 5  # duración de grabación en segundos
-FS = 16000    # frecuencia de muestreo
+FS = 16000  # frecuencia de muestreo
 ARCHIVO_SALIDA = "temp_audio/mic_input.wav"
 
 # ==============================
 # FUNCIONES DE FORMATO SRT
 # ==============================
+
 
 def format_time(seconds):
     h = int(seconds // 3600)
@@ -24,27 +26,26 @@ def format_time(seconds):
     ms = int((seconds - int(seconds)) * 1000)
     return f"{h:02}:{m:02}:{s:02},{ms:03}"
 
+
 # ==============================
 # FUNCIÓN PRINCIPAL
 # ==============================
 
+
 def grabar_y_transcribir(text_widget):
     os.makedirs("temp_audio", exist_ok=True)
 
-    text_widget.insert(tk.END, "🎙️ Grabando audio...
-")
+    text_widget.insert(tk.END, "🎙️ Grabando audio...")
     text_widget.update()
 
     audio = sd.rec(int(DURACION * FS), samplerate=FS, channels=1, dtype="int16")
     sd.wait()
 
     write(ARCHIVO_SALIDA, FS, audio)
-    text_widget.insert(tk.END, f"✅ Audio guardado en: {ARCHIVO_SALIDA}
-")
+    text_widget.insert(tk.END, f"✅ Audio guardado en: {ARCHIVO_SALIDA}")
     text_widget.update()
 
-    text_widget.insert(tk.END, "🤖 Transcribiendo...
-")
+    text_widget.insert(tk.END, "🤖 Transcribiendo...")
     text_widget.update()
 
     model = WhisperModel("base", device="cpu", compute_type="int8")
@@ -69,6 +70,7 @@ def grabar_y_transcribir(text_widget):
     text_widget.insert(tk.END, f"\n📄 Subtítulos guardados: {srt_path}")
     text_widget.update()
 
+
 # ==============================
 # INTERFAZ CON TKINTER
 # ==============================
@@ -78,11 +80,21 @@ ventana.title("Escúchame - Subtítulos en Vivo")
 ventana.configure(bg="black")
 
 # Widget de texto grande
-texto = tk.Text(ventana, wrap=tk.WORD, font=("Helvetica", 18), bg="black", fg="yellow", height=20, width=70)
+texto = tk.Text(
+    ventana,
+    wrap=tk.WORD,
+    font=("Helvetica", 18),
+    bg="black",
+    fg="yellow",
+    height=20,
+    width=70,
+)
 texto.pack(padx=20, pady=20)
 
 # Botón para iniciar
-boton = ttk.Button(ventana, text="Iniciar subtitulado", command=lambda: grabar_y_transcribir(texto))
+boton = ttk.Button(
+    ventana, text="Iniciar subtitulado", command=lambda: grabar_y_transcribir(texto)
+)
 boton.pack(pady=10)
 
 # Iniciar loop
