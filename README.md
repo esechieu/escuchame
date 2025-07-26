@@ -137,8 +137,16 @@ El proyecto está en desarrollo activo. Toda ayuda es bienvenida:
 
 ## 📄 Licencia
 
-Distribuido bajo la licencia **MIT** (o **GPL** si se opta por copyleft).  
-Todo el código y dependencias son **100% de código abierto y auditables**.
+Este proyecto está distribuido bajo la licencia [MIT](https://opensource.org/licenses/MIT).  
+Todo el código fuente y sus dependencias son **100% de código abierto y auditables**.
+
+Podés usar, modificar, compartir y adaptar este software con total libertad, siempre que mantengas la atribución original.
+
+---
+
+> 🧑‍💻 Este software es libre y abierto, pero tiene una intención ética:  
+> construir tecnología accesible, transparente y humana.  
+> Por respeto al trabajo y propósito detrás de este proyecto, se agradece mencionar la autoría en forks o derivados.
 
 ---
 
