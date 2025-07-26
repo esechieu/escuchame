@@ -1,4 +1,4 @@
 1
-00:00:00,000 --> 00:00:05,000
-Hola, ¿cómo estás? Espero que esté muy bien.
+00:00:00,000 --> 00:00:04,000
+hola como va el perbe este es mol
 
